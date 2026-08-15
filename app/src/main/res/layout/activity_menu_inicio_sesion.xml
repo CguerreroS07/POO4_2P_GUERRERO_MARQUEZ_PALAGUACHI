@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="32dp"
+    android:background="#FFFFFF">
+
+    <!-- Logo / Imagen del Mundial -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/copa_mundial" />
+
+    <!-- Título de la App -->
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="PRONÓSTICOS\nMUNDIAL 2026"
+        android:textAlignment="center"
+        android:textColor="#0B2545"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- Etiqueta Usuario -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        android:textColor="#0B2545"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Campo de Texto Usuario -->
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:hint="Ingrese su usuario"
+        android:inputType="text"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+
+    <!-- Etiqueta Contraseña -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contraseña"
+        android:textColor="#0B2545"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Campo de Texto Contraseña -->
+    <EditText
+        android:id="@+id/edtContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="32dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:hint="Ingrese su contraseña"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+
+    <!-- Botón Iniciar Sesión -->
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:backgroundTint="#0B2545"
+        android:text="INICIAR SESIÓN"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+</LinearLayout>
