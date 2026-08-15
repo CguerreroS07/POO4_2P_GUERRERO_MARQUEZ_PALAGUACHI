@@ -14,23 +14,18 @@ public class Usuario {
         this.nombreCompleto = nombreCompleto;
         this.tipoUsuario = tipoUsuario;
     }
-
     public String getIdUsuario() {
         return idUsuario;
     }
-
     public String getNombreUsuario() {
         return nombreUsuario;
     }
-
     public String getContrasena() {
         return contrasena;
     }
-
     public String getNombreCompleto() {
         return nombreCompleto;
     }
-
     public String getTipoUsuario() {
         return tipoUsuario;
     }
