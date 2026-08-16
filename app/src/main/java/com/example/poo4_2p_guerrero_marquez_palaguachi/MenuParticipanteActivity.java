@@ -50,7 +50,9 @@ public class MenuParticipanteActivity extends AppCompatActivity {
         btnTabla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MenuParticipanteActivity.this, TablaPosiciones.class);
 
+                startActivity(intent);
             }
         });
 
