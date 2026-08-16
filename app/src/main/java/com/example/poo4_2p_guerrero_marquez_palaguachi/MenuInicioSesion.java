@@ -43,19 +43,23 @@ public class MenuInicioSesion extends AppCompatActivity {
                     encontrado = true;
 
                     String nombreCompleto = datos[3];
-                    String tipoUsuario = datos[4];
+                    String tipoUsuarioRaw = datos[4];
+
+                    String tipoFormateado = tipoUsuarioRaw.equalsIgnoreCase("ADMINISTRADOR")
+                            ? "Administrador"
+                            : "Participante";
 
                     Intent intent;
-
-                    if (tipoUsuario.equalsIgnoreCase("ADMINISTRADOR")) {
+                    if (tipoUsuarioRaw.equalsIgnoreCase("ADMINISTRADOR")) {
                         intent = new Intent(MenuInicioSesion.this, MenuAdministradorActivity.class);
                     } else {
                         intent = new Intent(MenuInicioSesion.this, MenuParticipanteActivity.class);
                     }
 
-                    intent.putExtra("NOMBRE_USUARIO", nombreCompleto);
-                    startActivity(intent);
+                    intent.putExtra("NOMBRE_COMPLETO", nombreCompleto);
+                    intent.putExtra("TIPO_USUARIO", tipoFormateado);
 
+                    startActivity(intent);
                     finish();
                     break;
                 }
