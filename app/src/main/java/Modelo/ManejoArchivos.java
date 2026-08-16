@@ -44,9 +44,16 @@ public class ManejoArchivos {
                 new InputStreamReader(context.openFileInput("usuarios.txt"))
         )) {
             String linea;
+            boolean primeraLinea = true;
             while ((linea = reader.readLine()) != null) {
+                if (primeraLinea) {
+                    primeraLinea = false;
+                    continue;
+                }
+
                 if (linea.trim().isEmpty()) continue;
-                String[] datos = linea.split(",");
+
+                String[] datos = linea.split(";");
                 if (datos.length >= 5) {
                     String idUsuario = datos[0].trim();
                     String user = datos[1].trim();
@@ -76,7 +83,7 @@ public class ManejoArchivos {
         )) {
             String linea;
             while ((linea = reader.readLine()) != null) {
-                String[] datos = linea.split(",");
+                String[] datos = linea.split(";");
                 if (datos.length >= 2 && datos[0].trim().equals(idUsuario)) {
                     return Integer.parseInt(datos[1].trim());
                 }
@@ -94,7 +101,7 @@ public class ManejoArchivos {
         )) {
             String linea;
             while ((linea = reader.readLine()) != null) {
-                String[] datos = linea.split(",");
+                String[] datos = linea.split(";");
                 if (datos.length >= 2 && datos[0].trim().equals(idUsuario)) {
                     return datos[1].trim();
                 }
@@ -113,19 +120,27 @@ public class ManejoArchivos {
                 new InputStreamReader(context.openFileInput("partidos.txt"))
         )) {
             String linea;
+            boolean primeraLinea = true;
             while ((linea = reader.readLine()) != null) {
+                if (primeraLinea) {
+                    primeraLinea = false;
+                    continue;
+                }
                 if (linea.trim().isEmpty()) continue;
-                String[] datos = linea.split(",");
-                if (datos.length >= 9) {
+
+                String[] datos = linea.split(";");
+
+                // Ajuste de lectura para las 8 columnas del nuevo partidos.txt
+                if (datos.length >= 8) {
                     String id = datos[0].trim();
-                    String fecha = datos[1].trim();
-                    String hora = datos[2].trim();
-                    String estadio = datos[3].trim();
-                    String sel1 = datos[4].trim();
-                    String sel2 = datos[5].trim();
-                    EstadoPartido estado = EstadoPartido.valueOf(datos[6].trim().toUpperCase());
-                    int goles1 = Integer.parseInt(datos[7].trim());
-                    int goles2 = Integer.parseInt(datos[8].trim());
+                    String fecha = datos[2].trim();
+                    String hora = datos[3].trim();
+                    String estadio = datos[4].trim();
+                    String sel1 = datos[5].trim();
+                    String sel2 = datos[6].trim();
+                    EstadoPartido estado = EstadoPartido.valueOf(datos[7].trim().toUpperCase());
+                    int goles1 = 0;
+                    int goles2 = 0;
 
                     listaPartidos.add(new Partido(id, fecha, hora, estadio, sel1, sel2, estado, goles1, goles2));
                 }
@@ -140,14 +155,14 @@ public class ManejoArchivos {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(context.openFileOutput("partidos.txt", Context.MODE_PRIVATE))
         )) {
+            writer.write("idPartido;fase;fecha;horaUTC;estadio;seleccion1;seleccion2;estado");
+            writer.newLine();
+
             for (Partido p : partidos) {
-                String linea = String.format("%s,%s,%s,%s,%s,%s,%s,%d,%d",
-                        p.getIdPartido(), p.getFecha(), p.getHora(), p.getEstadio(),
-                        p.getSeleccion1(), p.getSeleccion2(), p.getEstado().name(),
-                        p.getGolesOficiales1(), p.getGolesOficiales2());
-                writer.write(linea);
+                writer.write(p.getIdPartido() + ";FASE_ACTUAL;" + p.getFecha() + ";" + p.getHora() + ";" + p.getEstadio() + ";" + p.getSeleccion1() + ";" + p.getSeleccion2() + ";" + p.getEstado().name());
                 writer.newLine();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -200,8 +215,11 @@ public class ManejoArchivos {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(context.openFileOutput("participantes.txt", Context.MODE_PRIVATE))
         )) {
+            writer.write("idUsuario;puntajeAcumulado");
+            writer.newLine();
+
             for (Participante p : participantes) {
-                String linea = p.getIdUsuario() + "," + p.getPuntajeAcumulado();
+                String linea = p.getIdUsuario() + ";" + p.getPuntajeAcumulado();
                 writer.write(linea);
                 writer.newLine();
             }
