@@ -13,7 +13,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MenuParticipanteActivity extends AppCompatActivity {
 
-    // 1. Declaramos las dos nuevas variables
     private TextView tvNombreHeader, tvTipoHeader;
 
     @Override
@@ -28,15 +27,12 @@ public class MenuParticipanteActivity extends AppCompatActivity {
             return insets;
         });
 
-        // 2. Enlazamos con los IDs del nuevo encabezado
         tvNombreHeader = findViewById(R.id.tvNombreUsuarioHeader);
         tvTipoHeader = findViewById(R.id.tvTipoUsuarioHeader);
 
-        // 3. Capturamos los datos enviados desde LoginActivity
         String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
         String tipo = getIntent().getStringExtra("TIPO_USUARIO");
 
-        // 4. Asignamos los textos si no son nulos
         if (nombre != null) tvNombreHeader.setText(nombre);
         if (tipo != null) tvTipoHeader.setText(tipo);
     }
@@ -55,13 +51,11 @@ public class MenuParticipanteActivity extends AppCompatActivity {
     }
 
     public void abrirPronosticos(View view) {
-        // Intent intent = new Intent(this, PronosticosActivity.class);
-        // startActivity(intent);
+
     }
 
     public void abrirMisPronosticos(View view) {
-        // Intent intent = new Intent(this, MisPronosticosActivity.class);
-        // startActivity(intent);
+
     }
 
     public void salir(View view) {

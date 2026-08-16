@@ -24,9 +24,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/marg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="80dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingTop="8dp">
@@ -79,52 +80,145 @@
                 android:src="@drawable/logo_mundial_2026" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnAdministrarPartidos"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/white"
-            android:elevation="20sp"
-            android:ellipsize="none"
-            android:longClickable="false"
-            android:text="Administrar partidos"
-            android:textColor="#041B44"
-            app:cornerRadius="12sp"
-            app:strokeColor="#898686"
-            app:strokeWidth="0.7sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="10dp">
 
-        <Button
-            android:id="@+id/btnActualizarPuntajes"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/white"
-            android:elevation="20sp"
-            android:ellipsize="none"
-            android:longClickable="false"
-            android:text="Actualizar puntajes"
-            android:textColor="#041B44"
-            app:cornerRadius="12sp"
-            app:strokeColor="#898686"
-            app:strokeWidth="0.7sp"/>
+            <!-- BOTÓN 1: Administrar partidos -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="4dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-        <Button
-            android:id="@+id/btnSalirAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/white"
-            android:elevation="20sp"
-            android:ellipsize="none"
-            android:longClickable="false"
-            android:text="Salir"
-            android:textColor="#041B44"
-            app:cornerRadius="12sp"
-            app:strokeColor="#898686"
-            app:strokeWidth="0.7sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:onClick="administrarPartidos">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_administrar" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Administrar partidos"
+                        android:textColor="#0C2340"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_flecha_derecha" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- BOTÓN 2: Actualizar puntajes -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="4dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:onClick="actualizarPuntajes">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_actualizar" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Actualizar puntajes"
+                        android:textColor="#0C2340"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_flecha_derecha" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- BOTÓN 3: Salir -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="4dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:onClick="salirAdmin">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_salir" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Salir"
+                        android:textColor="#0C2340"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_flecha_derecha" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,6 @@ package com.example.poo4_2p_guerrero_marquez_palaguachi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 public class MenuAdministradorActivity extends AppCompatActivity {
 
     private TextView tvNombreHeader, tvTipoHeader;
-    private Button btnAdministrarPartidos, btnActualizarPuntajes, btnSalirAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,35 +30,20 @@ public class MenuAdministradorActivity extends AppCompatActivity {
         tvNombreHeader = findViewById(R.id.tvNombreUsuarioHeader);
         tvTipoHeader = findViewById(R.id.tvTipoUsuarioHeader);
 
-        // 3. Enlazar los botones
-        btnAdministrarPartidos = findViewById(R.id.btnAdministrarPartidos);
-        btnActualizarPuntajes = findViewById(R.id.btnActualizarPuntajes);
-        btnSalirAdmin = findViewById(R.id.btnSalirAdmin);
-
         String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
         String tipo = getIntent().getStringExtra("TIPO_USUARIO");
 
         if (nombre != null) tvNombreHeader.setText(nombre);
         if (tipo != null) tvTipoHeader.setText(tipo);
+    }
 
+    public void administrarPartidos(View view) {
+    }
 
-        btnSalirAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishAffinity();
-            }
-        });
+    public void actualizarPuntajes(View view) {
+    }
 
-        btnAdministrarPartidos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-        btnActualizarPuntajes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+    public void salirAdmin(View view) {
+        finishAffinity();
     }
 }
