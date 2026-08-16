@@ -11,10 +11,10 @@
         android:id="@+id/ParticipanteLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="1sp"
+        android:layout_marginTop="1sp"
+        android:layout_marginEnd="1sp"
+        android:layout_marginBottom="1sp"
         android:orientation="vertical"
         android:padding="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,43 +22,217 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txtBienvenida"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30sp"
-            android:text="Bienvenido"
-            android:textSize="22sp" />
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
 
-        <Button
-            android:id="@+id/btnTabla"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12sp"
-            android:paddingBottom="12sp"
-            android:text="Tabla de posiciones" />
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/shape_circle_avatar"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:tint="#FFFFFF" />
 
-        <Button
-            android:id="@+id/btnPronosticos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12sp"
-            android:paddingBottom="12sp"
-            android:text="Mis pronósticos"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnMisPronosticos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12sp"
-            android:paddingLeft="15sp"
-            android:text="Mis pronósticos" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido,"
+                    android:textColor="#1E293B"
+                    android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/btnSalir"
+                <TextView
+                    android:id="@+id/tvNombreUsuarioHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre Apellido"
+                    android:textColor="#0B1B3D"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTipoUsuarioHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Participante"
+                    android:textColor="#22C55E"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_mundial_2026" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15sp"
-            android:text="Salir" />
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="10dp">
+
+            <!-- BOTÓN 1: Tabla de posiciones -->
+            <LinearLayout
+                android:id="@+id/btnTablaMiniLayout"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_boton_blanco"
+                android:elevation="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="abrirTablaPosiciones">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_copa" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Tabla de posiciones"
+                    android:textColor="#0C2340"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_flecha_derecha" />
+            </LinearLayout>
+
+            <!-- BOTÓN 2: Pronósticos -->
+            <LinearLayout
+                android:id="@+id/btnPronosticosMiniLayout"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_boton_blanco"
+                android:elevation="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="abrirPronosticos">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_balon" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Pronósticos"
+                    android:textColor="#0C2340"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_flecha_derecha" />
+            </LinearLayout>
+
+            <!-- BOTÓN 3: Mis pronósticos -->
+            <LinearLayout
+                android:id="@+id/btnMisPronosticosMiniLayout"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_boton_blanco"
+                android:elevation="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="abrirMisPronosticos">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_mis_pronosticos" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Mis pronósticos"
+                    android:textColor="#0C2340"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_flecha_derecha" />
+            </LinearLayout>
+
+            <!-- BOTÓN 4: Salir -->
+            <LinearLayout
+                android:id="@+id/btnSalirMiniLayout"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_boton_blanco"
+                android:elevation="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="salir">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_salir" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Salir"
+                    android:textColor="#0C2340"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_flecha_derecha" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

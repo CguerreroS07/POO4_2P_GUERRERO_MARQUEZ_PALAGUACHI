@@ -3,7 +3,6 @@ package com.example.poo4_2p_guerrero_marquez_palaguachi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,8 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MenuParticipanteActivity extends AppCompatActivity {
 
-    private TextView txtBienvenida;
-    private Button btnTabla, btnPronosticos, btnMisPronosticos, btnSalir;
+    // 1. Declaramos las dos nuevas variables
+    private TextView tvNombreHeader, tvTipoHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,43 +28,43 @@ public class MenuParticipanteActivity extends AppCompatActivity {
             return insets;
         });
 
-        txtBienvenida = findViewById(R.id.txtBienvenida);
-        btnTabla = findViewById(R.id.btnTabla);
-        btnPronosticos = findViewById(R.id.btnPronosticos);
-        btnMisPronosticos = findViewById(R.id.btnMisPronosticos);
-        btnSalir = findViewById(R.id.btnSalir);
+        // 2. Enlazamos con los IDs del nuevo encabezado
+        tvNombreHeader = findViewById(R.id.tvNombreUsuarioHeader);
+        tvTipoHeader = findViewById(R.id.tvTipoUsuarioHeader);
 
-        String nombreUsuario = getIntent().getStringExtra("NOMBRE_USUARIO");
-        if(nombreUsuario != null) {
-            txtBienvenida.setText("Bienvenido(a)\n" + nombreUsuario);
-        }
+        // 3. Capturamos los datos enviados desde LoginActivity
+        String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
+        String tipo = getIntent().getStringExtra("TIPO_USUARIO");
 
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishAffinity();
-            }
-        });
+        // 4. Asignamos los textos si no son nulos
+        if (nombre != null) tvNombreHeader.setText(nombre);
+        if (tipo != null) tvTipoHeader.setText(tipo);
+    }
 
-        btnTabla.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuParticipanteActivity.this, TablaPosiciones.class);
 
-                startActivity(intent);
-            }
-        });
+    public void abrirTablaPosiciones(View view) {
+        Intent intent = new Intent(this, TablaPosiciones.class);
 
-        btnPronosticos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
+        String tipo = getIntent().getStringExtra("TIPO_USUARIO");
 
-        btnMisPronosticos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        intent.putExtra("NOMBRE_COMPLETO", nombre);
+        intent.putExtra("TIPO_USUARIO", tipo);
+
+        startActivity(intent);
+    }
+
+    public void abrirPronosticos(View view) {
+        // Intent intent = new Intent(this, PronosticosActivity.class);
+        // startActivity(intent);
+    }
+
+    public void abrirMisPronosticos(View view) {
+        // Intent intent = new Intent(this, MisPronosticosActivity.class);
+        // startActivity(intent);
+    }
+
+    public void salir(View view) {
+        finishAffinity();
     }
 }

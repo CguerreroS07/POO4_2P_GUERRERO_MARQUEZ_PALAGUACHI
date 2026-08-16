@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MenuAdministradorActivity extends AppCompatActivity {
 
-    private TextView txtBienvenidaAdmin;
+    private TextView tvNombreHeader, tvTipoHeader;
     private Button btnAdministrarPartidos, btnActualizarPuntajes, btnSalirAdmin;
 
     @Override
@@ -29,15 +29,20 @@ public class MenuAdministradorActivity extends AppCompatActivity {
             return insets;
         });
 
-        txtBienvenidaAdmin = findViewById(R.id.txtBienvenidaAdmin);
+        tvNombreHeader = findViewById(R.id.tvNombreUsuarioHeader);
+        tvTipoHeader = findViewById(R.id.tvTipoUsuarioHeader);
+
+        // 3. Enlazar los botones
         btnAdministrarPartidos = findViewById(R.id.btnAdministrarPartidos);
         btnActualizarPuntajes = findViewById(R.id.btnActualizarPuntajes);
         btnSalirAdmin = findViewById(R.id.btnSalirAdmin);
 
-        String nombreAdmin = getIntent().getStringExtra("NOMBRE_USUARIO");
-        if (nombreAdmin != null) {
-            txtBienvenidaAdmin.setText("Bienvenido(a)\n" + nombreAdmin);
-        }
+        String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
+        String tipo = getIntent().getStringExtra("TIPO_USUARIO");
+
+        if (nombre != null) tvNombreHeader.setText(nombre);
+        if (tipo != null) tvTipoHeader.setText(tipo);
+
 
         btnSalirAdmin.setOnClickListener(new View.OnClickListener() {
             @Override

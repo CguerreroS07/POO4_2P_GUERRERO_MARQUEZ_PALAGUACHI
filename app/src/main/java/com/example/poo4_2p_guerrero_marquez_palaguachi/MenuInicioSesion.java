@@ -6,8 +6,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
+import java.util.List;
+
+import Modelo.ManejoArchivos;
+import Modelo.Usuario;
 
 public class MenuInicioSesion extends AppCompatActivity {
     private EditText edtUsuario, edtContrasena;
@@ -33,40 +36,28 @@ public class MenuInicioSesion extends AppCompatActivity {
 
     private void validarCredenciales(String user, String pass) throws CredencialesInvalidasException {
         boolean encontrado = false;
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("usuarios.txt")));
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] datos = linea.split(";");
 
-                if (datos[1].equals(user) && datos[2].equals(pass)) {
-                    encontrado = true;
+        List<Usuario> usuarios = ManejoArchivos.leerUsuarios(this);
 
-                    String nombreCompleto = datos[3];
-                    String tipoUsuarioRaw = datos[4];
+        for (Usuario u : usuarios) {
+            if (u.getNombreUsuario().equals(user) && u.getContrasena().equals(pass)) {
+                encontrado = true;
 
-                    String tipoFormateado = tipoUsuarioRaw.equalsIgnoreCase("ADMINISTRADOR")
-                            ? "Administrador"
-                            : "Participante";
+                Intent intent;
 
-                    Intent intent;
-                    if (tipoUsuarioRaw.equalsIgnoreCase("ADMINISTRADOR")) {
-                        intent = new Intent(MenuInicioSesion.this, MenuAdministradorActivity.class);
-                    } else {
-                        intent = new Intent(MenuInicioSesion.this, MenuParticipanteActivity.class);
-                    }
-
-                    intent.putExtra("NOMBRE_COMPLETO", nombreCompleto);
-                    intent.putExtra("TIPO_USUARIO", tipoFormateado);
-
-                    startActivity(intent);
-                    finish();
-                    break;
+                if (u.getTipoUsuario().equalsIgnoreCase("ADMINISTRADOR")) {
+                    intent = new Intent(MenuInicioSesion.this, MenuAdministradorActivity.class);
+                } else {
+                    intent = new Intent(MenuInicioSesion.this, MenuParticipanteActivity.class);
                 }
+
+                intent.putExtra("NOMBRE_COMPLETO", u.getNombreCompleto());
+                intent.putExtra("TIPO_USUARIO", u.getTipoUsuario());
+
+                startActivity(intent);
+                finish();
+                break;
             }
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         if (!encontrado) {
