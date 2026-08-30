@@ -15,15 +15,17 @@ public class Administrador extends Usuario implements Serializable {
 
     public void cerrarPronosticos(Partido partido) {
         if (partido != null) {
-            partido.cambiarEstado(EstadoPartido.CERRADO);
+            // Se usa el setter correcto que definimos en la clase Partido
+            partido.setEstado(EstadoPartido.CERRADO);
         }
     }
 
     public void registrarResultadoOficial(Partido partido, int goles1, int goles2) {
         if (partido != null) {
-            partido.setGolesOficiales1(goles1);
-            partido.setGolesOficiales2(goles2);
-            partido.cambiarEstado(EstadoPartido.FINALIZADO);
+            // Se usan los setters correctos para los goles
+            partido.setGoles1(goles1);
+            partido.setGoles2(goles2);
+            partido.setEstado(EstadoPartido.FINALIZADO);
         }
     }
 

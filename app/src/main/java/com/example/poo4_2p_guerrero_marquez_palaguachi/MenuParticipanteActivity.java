@@ -51,7 +51,15 @@ public class MenuParticipanteActivity extends AppCompatActivity {
     }
 
     public void abrirPronosticos(View view) {
+        Intent intent = new Intent(this, PronosticosActivity.class);
 
+        String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
+        String tipo = getIntent().getStringExtra("TIPO_USUARIO");
+
+        intent.putExtra("NOMBRE_COMPLETO", nombre);
+        intent.putExtra("TIPO_USUARIO", tipo);
+
+        startActivity(intent);
     }
 
     public void abrirMisPronosticos(View view) {

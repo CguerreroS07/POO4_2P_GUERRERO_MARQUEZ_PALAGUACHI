@@ -130,9 +130,9 @@ public class ManejoArchivos {
 
                 String[] datos = linea.split(";");
 
-                // Ajuste de lectura para las 8 columnas del nuevo partidos.txt
                 if (datos.length >= 8) {
                     String id = datos[0].trim();
+                    String fase = datos[1].trim();
                     String fecha = datos[2].trim();
                     String hora = datos[3].trim();
                     String estadio = datos[4].trim();
@@ -142,7 +142,7 @@ public class ManejoArchivos {
                     int goles1 = 0;
                     int goles2 = 0;
 
-                    listaPartidos.add(new Partido(id, fecha, hora, estadio, sel1, sel2, estado, goles1, goles2));
+                    listaPartidos.add(new Partido(id, fase, fecha, hora, estadio, sel1, sel2, estado, goles1, goles2));
                 }
             }
         } catch (IOException e) {
