@@ -38,6 +38,8 @@ public class MenuAdministradorActivity extends AppCompatActivity {
     }
 
     public void administrarPartidos(View view) {
+        Intent intent = new Intent(MenuAdministradorActivity.this, AdministrarPartidosActivity.class);
+        startActivity(intent);
     }
 
     public void actualizarPuntajes(View view) {
