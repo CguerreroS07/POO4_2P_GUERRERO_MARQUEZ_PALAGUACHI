@@ -35,6 +35,7 @@ public class MenuParticipanteActivity extends AppCompatActivity {
 
         if (nombre != null) tvNombreHeader.setText(nombre);
         if (tipo != null) tvTipoHeader.setText(tipo);
+
     }
 
 
@@ -63,7 +64,17 @@ public class MenuParticipanteActivity extends AppCompatActivity {
     }
 
     public void abrirMisPronosticos(View view) {
+        Intent intent = new Intent(this, MisPronosticos.class);
 
+        String idUsuario = getIntent().getStringExtra("ID_USUARIO");
+        String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
+        String tipo = getIntent().getStringExtra("TIPO_USUARIO");
+
+        intent.putExtra("ID_USUARIO", idUsuario);
+        intent.putExtra("NOMBRE_COMPLETO", nombre);
+        intent.putExtra("TIPO_USUARIO", tipo);
+
+        startActivity(intent);
     }
 
     public void salir(View view) {
