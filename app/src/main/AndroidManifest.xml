@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.POO4_2P_GUERRERO_MARQUEZ_PALAGUACHI" >
         <activity
-            android:name=".LoginActivity"
+            android:name=".MenuInicioSesion"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>
@@ -39,15 +39,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- Menú Participante -->
-        <activity
-            android:name=".MenuParticipanteActivity"
-            android:exported="false" />
-
-        <!-- Menú Administrador -->
-        <activity
-            android:name=".MenuAdministradorActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
