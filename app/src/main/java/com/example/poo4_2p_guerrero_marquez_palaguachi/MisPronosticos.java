@@ -66,7 +66,6 @@ public class MisPronosticos extends AppCompatActivity {
         containerPronosticos.removeAllViews();
 
         List<Partido> partidos = ManejoArchivos.leerPartidos(this);
-
         List<Pronostico> misPronosticos = deserializarPronosticos();
 
         if (misPronosticos.isEmpty()) {
@@ -78,9 +77,7 @@ public class MisPronosticos extends AppCompatActivity {
             return;
         }
 
-        // 3. Cruzar pronósticos registrados con la información del partido correspondiente
         for (Pronostico pron : misPronosticos) {
-            // Filtrar únicamente los pronósticos del usuario actual
             if (idUsuario != null && !idUsuario.equals(pron.getIdParticipante())) {
                 continue;
             }
@@ -112,14 +109,24 @@ public class MisPronosticos extends AppCompatActivity {
 
         tvFase.setText(partido.getFase());
 
+        // Limpiar el nombre del estadio de los paréntesis
+        String estadioOriginal = partido.getEstadio();
+        String estadioLimpio = estadioOriginal;
+        int inicioParentesis = estadioOriginal.indexOf("(");
+        int finParentesis = estadioOriginal.indexOf(")");
+
+        if (inicioParentesis != -1 && finParentesis != -1 && finParentesis > inicioParentesis) {
+            estadioLimpio = estadioOriginal.substring(inicioParentesis + 1, finParentesis);
+        }
+
         String detalleStr = String.format(Locale.getDefault(), "📅 %s   🕒 %s   🏟️ %s",
-                partido.getFecha(), partido.getHora(), partido.getEstadio());
+                partido.getFecha(), partido.getHora(), estadioLimpio);
         tvDetallePartido.setText(detalleStr);
 
         tvNombreSeleccion1.setText(partido.getSeleccion1());
         tvNombreSeleccion2.setText(partido.getSeleccion2());
-        imgBandera1.setImageResource(obtenerIdBandera(partido.getSeleccion1()));
-        imgBandera2.setImageResource(obtenerIdBandera(partido.getSeleccion2()));
+        imgBandera1.setImageDrawable(obtenerBanderaDesdeAssets(partido.getSeleccion1()));
+        imgBandera2.setImageDrawable(obtenerBanderaDesdeAssets(partido.getSeleccion2()));
 
         tvGoles1.setText(String.valueOf(pron.getGolesSeleccion1()));
         tvGoles2.setText(String.valueOf(pron.getGolesSeleccion2()));
@@ -134,7 +141,6 @@ public class MisPronosticos extends AppCompatActivity {
             if (layoutOficial != null) layoutOficial.setVisibility(View.VISIBLE);
             if (dividerResultados != null) dividerResultados.setVisibility(View.VISIBLE);
 
-            // Formateos usando String.format para evitar advertencias de concatenación
             String resOficial = String.format(Locale.getDefault(), "%d - %d", partido.getGoles1(), partido.getGoles2());
             tvResultadoOficial.setText(resOficial);
 
@@ -159,7 +165,7 @@ public class MisPronosticos extends AppCompatActivity {
             tvMensajeBanner.setBackgroundColor(Color.parseColor("#FEF9C3"));
             tvMensajeBanner.setTextColor(Color.parseColor("#CA8A04"));
 
-        } else { // ABIERTO / PENDIENTE
+        } else {
             tvEstadoBadge.setText("ABIERTO");
             tvEstadoBadge.setBackgroundColor(Color.parseColor("#E8F5E9"));
             tvEstadoBadge.setTextColor(Color.parseColor("#2E7D32"));
@@ -186,44 +192,98 @@ public class MisPronosticos extends AppCompatActivity {
 
     @SuppressWarnings("unchecked")
     private List<Pronostico> deserializarPronosticos() {
-        List<Pronostico> lista = new ArrayList<>();
-        File file = new File(getFilesDir(), "pronosticos_guardados.dat");
+        List<Pronostico> listaUnificada = new ArrayList<>();
+        File directorio = getFilesDir();
+        File[] archivos = directorio.listFiles();
 
-        if (!file.exists()) {
-            return lista;
+        if (archivos == null || idUsuario == null) {
+            return listaUnificada;
         }
 
-        try (FileInputStream fis = new FileInputStream(file);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
+        // Buscar todos los archivos que pertenezcan a este usuario para juntar todas sus fases
+        String prefijoUsuario = "pronostico_" + idUsuario + "_";
 
-            Object obj = ois.readObject();
-            if (obj instanceof List) {
-                lista = (List<Pronostico>) obj;
+        for (File archivo : archivos) {
+            if (archivo.getName().startsWith(prefijoUsuario) && archivo.getName().endsWith(".dat")) {
+                try (FileInputStream fis = new FileInputStream(archivo);
+                     ObjectInputStream ois = new ObjectInputStream(fis)) {
+
+                    Object obj = ois.readObject();
+                    if (obj instanceof List) {
+                        listaUnificada.addAll((List<Pronostico>) obj);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
-        return lista;
+        return listaUnificada;
     }
 
-    private int obtenerIdBandera(String pais) {
-        String codigoArchivo;
+    private android.graphics.drawable.Drawable obtenerBanderaDesdeAssets(String pais) {
+        String codigoArchivo = "";
+
         switch (pais) {
-            case "Canadá": codigoArchivo = "ca"; break;
-            case "México": codigoArchivo = "mx"; break;
             case "Alemania": codigoArchivo = "de"; break;
-            case "Brasil": codigoArchivo = "br"; break;
-            case "Francia": codigoArchivo = "fr"; break;
-            case "España": codigoArchivo = "es"; break;
+            case "Arabia Saudita": codigoArchivo = "sa"; break;
+            case "Argelia": codigoArchivo = "dz"; break;
             case "Argentina": codigoArchivo = "ar"; break;
-            case "Países Bajos": codigoArchivo = "nl"; break;
-            case "Portugal": codigoArchivo = "pt"; break;
+            case "Australia": codigoArchivo = "au"; break;
+            case "Austria": codigoArchivo = "at"; break;
+            case "Bélgica": codigoArchivo = "be"; break;
+            case "Bosnia y Herzegovina": codigoArchivo = "ba"; break;
+            case "Brasil": codigoArchivo = "br"; break;
+            case "Cabo Verde": codigoArchivo = "cv"; break;
+            case "Canadá": codigoArchivo = "ca"; break;
+            case "Catar": codigoArchivo = "qa"; break;
+            case "Chequia": codigoArchivo = "cz"; break;
+            case "Colombia": codigoArchivo = "co"; break;
+            case "Corea del Sur": codigoArchivo = "kr"; break;
+            case "Costa de Marfil": codigoArchivo = "ci"; break;
+            case "Croacia": codigoArchivo = "hr"; break;
+            case "Curazao": codigoArchivo = "cw"; break;
+            case "Ecuador": codigoArchivo = "ec"; break;
+            case "Egipto": codigoArchivo = "eg"; break;
+            case "Escocia": codigoArchivo = "gb_sct"; break;
+            case "España": codigoArchivo = "es"; break;
             case "Estados Unidos": codigoArchivo = "us"; break;
-            default: codigoArchivo = "ic_menu_camera"; break;
+            case "Francia": codigoArchivo = "fr"; break;
+            case "Ghana": codigoArchivo = "gh"; break;
+            case "Haití": codigoArchivo = "ht"; break;
+            case "Inglaterra": codigoArchivo = "gb_eng"; break;
+            case "Irak": codigoArchivo = "iq"; break;
+            case "Irán": codigoArchivo = "ir"; break;
+            case "Japón": codigoArchivo = "jp"; break;
+            case "Jordania": codigoArchivo = "jo"; break;
+            case "Marruecos": codigoArchivo = "ma"; break;
+            case "México": codigoArchivo = "mx"; break;
+            case "Noruega": codigoArchivo = "no"; break;
+            case "Nueva Zelanda": codigoArchivo = "nz"; break;
+            case "Países Bajos": codigoArchivo = "nl"; break;
+            case "Panamá": codigoArchivo = "pa"; break;
+            case "Paraguay": codigoArchivo = "py"; break;
+            case "Portugal": codigoArchivo = "pt"; break;
+            case "República Democrática del Congo": codigoArchivo = "cd"; break;
+            case "Senegal": codigoArchivo = "sn"; break;
+            case "Sudáfrica": codigoArchivo = "za"; break;
+            case "Suecia": codigoArchivo = "se"; break;
+            case "Suiza": codigoArchivo = "ch"; break;
+            case "Túnez": codigoArchivo = "tn"; break;
+            case "Turquía": codigoArchivo = "tr"; break;
+            case "Uruguay": codigoArchivo = "uy"; break;
+            case "Uzbekistán": codigoArchivo = "uz"; break;
+            default: codigoArchivo = ""; break;
         }
 
-        int idImagen = getResources().getIdentifier(codigoArchivo, "drawable", getPackageName());
-        return (idImagen != 0) ? idImagen : android.R.drawable.ic_menu_camera;
+        try {
+            // Lee el archivo .png directamente desde assets/banderas/
+            java.io.InputStream inputStream = getAssets().open("banderas/" + codigoArchivo + ".png");
+            return android.graphics.drawable.Drawable.createFromStream(inputStream, null);
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+            // Retorna un ícono por defecto si hay un error
+            return getResources().getDrawable(android.R.drawable.ic_menu_camera, null);
+        }
     }
 }

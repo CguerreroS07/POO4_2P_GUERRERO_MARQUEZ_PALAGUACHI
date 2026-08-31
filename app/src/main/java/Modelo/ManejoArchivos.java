@@ -181,6 +181,46 @@ public class ManejoArchivos {
         }
     }
 
+    public static boolean guardarOReemplazarPronostico(android.content.Context context, Modelo.Pronostico nuevoPronostico) {
+        String nombreArchivo = "pronostico_" + nuevoPronostico.getIdParticipante() + "_" + nuevoPronostico.getFaseTorneo().name().toLowerCase() + ".dat";
+        java.util.List<Modelo.Pronostico> listaPronosticos = new java.util.ArrayList<>();
+
+        try {
+            java.io.FileInputStream fis = context.openFileInput(nombreArchivo);
+            java.io.ObjectInputStream ois = new java.io.ObjectInputStream(fis);
+            listaPronosticos = (java.util.List<Modelo.Pronostico>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (Exception e) {
+        }
+
+        boolean existe = false;
+        for (int i = 0; i < listaPronosticos.size(); i++) {
+            if (listaPronosticos.get(i).getIdPartido().equals(nuevoPronostico.getIdPartido())) {
+                listaPronosticos.set(i, nuevoPronostico);
+                existe = true;
+                break;
+            }
+        }
+
+        if (!existe) {
+            listaPronosticos.add(nuevoPronostico);
+        }
+
+        try {
+            java.io.FileOutputStream fos = context.openFileOutput(nombreArchivo, android.content.Context.MODE_PRIVATE);
+            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(fos);
+            oos.writeObject(listaPronosticos);
+            oos.close();
+            fos.close();
+            return true; // Éxito
+        } catch (Exception e) {
+            e.printStackTrace();
+            android.util.Log.e("ERROR_ARCHIVO", "No se pudo guardar: " + e.getMessage());
+            return false; // Fallo
+        }
+    }
+
     public static void serializarPronostico(Context context, Pronostico pronostico, String nombreArchivo) {
         List<Pronostico> lista = deserializarPronosticos(context, nombreArchivo);
         lista.add(pronostico);
