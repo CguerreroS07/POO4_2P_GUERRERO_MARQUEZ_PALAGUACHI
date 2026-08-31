@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import Modelo.EstadoPartido;
 import Modelo.ManejoArchivos;
 import Modelo.Partido;
+import Modelo.FaseTorneo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,44 +36,30 @@ public class AdministrarPartidosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrar_partidos);
-
         spinnerFasesAdmin = findViewById(R.id.spinnerFasesAdmin);
         contenedorPartidosAdmin = findViewById(R.id.contenedorPartidosAdmin);
         btnVolverAdmin = findViewById(R.id.btnVolverAdmin);
-
-        String[] fases = {
-                "Fase de grupos",
-                "Dieciseisavos de final",
-                "Octavos de final",
-                "Cuartos de final",
-                "Semifinales",
-                "Partido por el tercer lugar",
-                "Final"
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, fases);
+        FaseTorneo[] fases = FaseTorneo.values();
+        ArrayAdapter<FaseTorneo> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, fases);
         spinnerFasesAdmin.setAdapter(adapter);
-
         cargarPartidosDesdeArchivo();
-
         spinnerFasesAdmin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String faseSeleccionada = fases[position];
-                mostrarPartidosPorFase(faseSeleccionada);
+                FaseTorneo faseSeleccionada = fases[position];
+                mostrarPartidosPorFase(faseSeleccionada.name());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
         btnVolverAdmin.setOnClickListener(v -> finish());
     }
-
     private void cargarPartidosDesdeArchivo() {
         listaPartidos = ManejoArchivos.leerPartidos(this);
     }
     private void guardarPartidosEnArchivo() {
         ManejoArchivos.guardarEstadoPartidos(this, listaPartidos);
     }
-
     private void mostrarPartidosPorFase(String fase) {
         contenedorPartidosAdmin.removeAllViews();
         if (listaPartidos == null) return;
