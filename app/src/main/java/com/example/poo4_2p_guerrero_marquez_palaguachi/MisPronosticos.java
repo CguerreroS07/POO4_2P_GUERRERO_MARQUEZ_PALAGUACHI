@@ -46,13 +46,11 @@ public class MisPronosticos extends AppCompatActivity {
         containerPronosticos = findViewById(R.id.containerPronosticos);
         btnVolver = findViewById(R.id.btnVolver);
 
-        // Obtener el idUsuario enviado desde la pantalla anterior
         idUsuario = getIntent().getStringExtra("ID_USUARIO");
         if (idUsuario == null) {
             idUsuario = getIntent().getStringExtra("NOMBRE_COMPLETO");
         }
 
-        // Cargar y mostrar la información de mis pronósticos
         cargarMisPronosticos();
 
         if (btnVolver != null) {
@@ -67,10 +65,8 @@ public class MisPronosticos extends AppCompatActivity {
     private void cargarMisPronosticos() {
         containerPronosticos.removeAllViews();
 
-        // 1. Obtener todos los partidos almacenados
         List<Partido> partidos = ManejoArchivos.leerPartidos(this);
 
-        // 2. Cargar todos los pronósticos guardados por el usuario
         List<Pronostico> misPronosticos = deserializarPronosticos();
 
         if (misPronosticos.isEmpty()) {
@@ -114,7 +110,6 @@ public class MisPronosticos extends AppCompatActivity {
         View layoutOficial = cardView.findViewById(R.id.layoutOficial);
         View dividerResultados = cardView.findViewById(R.id.dividerResultados);
 
-        // Llenar información general del partido y selección
         tvFase.setText(partido.getFase());
 
         String detalleStr = String.format(Locale.getDefault(), "📅 %s   🕒 %s   🏟️ %s",
@@ -126,11 +121,9 @@ public class MisPronosticos extends AppCompatActivity {
         imgBandera1.setImageResource(obtenerIdBandera(partido.getSeleccion1()));
         imgBandera2.setImageResource(obtenerIdBandera(partido.getSeleccion2()));
 
-        // Goles pronosticados
         tvGoles1.setText(String.valueOf(pron.getGolesSeleccion1()));
         tvGoles2.setText(String.valueOf(pron.getGolesSeleccion2()));
 
-        // Lógica según el estado del partido (ABIERTO, CERRADO, FINALIZADO)
         String estadoPartido = partido.getEstado().name();
 
         if (estadoPartido.equals("FINALIZADO")) {
