@@ -93,8 +93,11 @@ public class MisPronosticos extends AppCompatActivity {
         View cardView = LayoutInflater.from(this).inflate(R.layout.item_pronostico, containerPronosticos, false);
 
         TextView tvFase = cardView.findViewById(R.id.tvFase);
+        androidx.cardview.widget.CardView cardEstadoBadge = cardView.findViewById(R.id.cardEstadoBadge);
         TextView tvEstadoBadge = cardView.findViewById(R.id.tvEstadoBadge);
-        TextView tvDetallePartido = cardView.findViewById(R.id.tvDetallePartido);
+        TextView tvFecha = cardView.findViewById(R.id.tvFecha);
+        TextView tvHora = cardView.findViewById(R.id.tvHora);
+        TextView tvEstadio = cardView.findViewById(R.id.tvEstadio);
         TextView tvNombreSeleccion1 = cardView.findViewById(R.id.tvNombreSeleccion1);
         TextView tvNombreSeleccion2 = cardView.findViewById(R.id.tvNombreSeleccion2);
         ImageView imgBandera1 = cardView.findViewById(R.id.imgBandera1);
@@ -103,13 +106,13 @@ public class MisPronosticos extends AppCompatActivity {
         TextView tvGoles2 = cardView.findViewById(R.id.tvGoles2);
         TextView tvResultadoOficial = cardView.findViewById(R.id.tvResultadoOficial);
         TextView tvPuntosObtenidos = cardView.findViewById(R.id.tvPuntosObtenidos);
+        androidx.cardview.widget.CardView cardBanner = cardView.findViewById(R.id.cardBanner);
         TextView tvMensajeBanner = cardView.findViewById(R.id.tvMensajeBanner);
         View layoutOficial = cardView.findViewById(R.id.layoutOficial);
         View dividerResultados = cardView.findViewById(R.id.dividerResultados);
 
         tvFase.setText(partido.getFase());
 
-        // Limpiar el nombre del estadio de los paréntesis
         String estadioOriginal = partido.getEstadio();
         String estadioLimpio = estadioOriginal;
         int inicioParentesis = estadioOriginal.indexOf("(");
@@ -119,9 +122,9 @@ public class MisPronosticos extends AppCompatActivity {
             estadioLimpio = estadioOriginal.substring(inicioParentesis + 1, finParentesis);
         }
 
-        String detalleStr = String.format(Locale.getDefault(), "📅 %s   🕒 %s   🏟️ %s",
-                partido.getFecha(), partido.getHora(), estadioLimpio);
-        tvDetallePartido.setText(detalleStr);
+        tvFecha.setText(partido.getFecha());
+        tvHora.setText(partido.getHora());
+        tvEstadio.setText(estadioLimpio);
 
         tvNombreSeleccion1.setText(partido.getSeleccion1());
         tvNombreSeleccion2.setText(partido.getSeleccion2());
@@ -135,47 +138,59 @@ public class MisPronosticos extends AppCompatActivity {
 
         if (estadoPartido.equals("FINALIZADO")) {
             tvEstadoBadge.setText("FINALIZADO");
-            tvEstadoBadge.setBackgroundColor(Color.parseColor("#E8F5E9"));
-            tvEstadoBadge.setTextColor(Color.parseColor("#2E7D32"));
+            cardEstadoBadge.setCardBackgroundColor(Color.parseColor("#DCFCE7"));
+            tvEstadoBadge.setTextColor(Color.parseColor("#16A34A"));
 
-            if (layoutOficial != null) layoutOficial.setVisibility(View.VISIBLE);
-            if (dividerResultados != null) dividerResultados.setVisibility(View.VISIBLE);
+            layoutOficial.setVisibility(View.VISIBLE);
+            dividerResultados.setVisibility(View.VISIBLE);
 
             String resOficial = String.format(Locale.getDefault(), "%d - %d", partido.getGoles1(), partido.getGoles2());
             tvResultadoOficial.setText(resOficial);
 
-            String ptsTxt = String.format(Locale.getDefault(), "%d pt", pron.getPuntosObtenidos());
-            tvPuntosObtenidos.setText(ptsTxt);
+            int puntos = pron.getPuntosObtenidos();
+            tvPuntosObtenidos.setText(puntos + " pt" + (puntos != 1 ? "s" : ""));
 
-            String msgBanner = String.format(Locale.getDefault(), "✔ ¡Partido finalizado! Obtuviste %d punto(s).", pron.getPuntosObtenidos());
-            tvMensajeBanner.setText(msgBanner);
-
-            tvMensajeBanner.setBackgroundColor(Color.parseColor("#E8F5E9"));
-            tvMensajeBanner.setTextColor(Color.parseColor("#2E7D32"));
+            if (puntos == 3) {
+                tvMensajeBanner.setText("✔ ¡Acertaste el marcador exacto! Obtuviste 3 puntos.");
+                cardBanner.setCardBackgroundColor(Color.parseColor("#DCFCE7"));
+                tvMensajeBanner.setTextColor(Color.parseColor("#16A34A"));
+            } else if (puntos == 2) {
+                tvMensajeBanner.setText("✔ ¡Acertaste la diferencia / empate! Obtuviste 2 puntos.");
+                cardBanner.setCardBackgroundColor(Color.parseColor("#DCFCE7"));
+                tvMensajeBanner.setTextColor(Color.parseColor("#16A34A"));
+            } else if (puntos == 1) {
+                tvMensajeBanner.setText("✔ ¡Acertaste el ganador! Obtuviste 1 punto.");
+                cardBanner.setCardBackgroundColor(Color.parseColor("#DCFCE7"));
+                tvMensajeBanner.setTextColor(Color.parseColor("#16A34A"));
+            } else {
+                tvMensajeBanner.setText("❌ No acertaste. Obtuviste 0 puntos.");
+                cardBanner.setCardBackgroundColor(Color.parseColor("#FEE2E2")); // Rojo claro
+                tvMensajeBanner.setTextColor(Color.parseColor("#991B1B"));
+            }
 
         } else if (estadoPartido.equals("CERRADO")) {
             tvEstadoBadge.setText("CERRADO");
-            tvEstadoBadge.setBackgroundColor(Color.parseColor("#FEF9C3"));
+            cardEstadoBadge.setCardBackgroundColor(Color.parseColor("#FEF9C3"));
             tvEstadoBadge.setTextColor(Color.parseColor("#CA8A04"));
 
-            if (layoutOficial != null) layoutOficial.setVisibility(View.GONE);
-            if (dividerResultados != null) dividerResultados.setVisibility(View.GONE);
+            layoutOficial.setVisibility(View.GONE);
+            dividerResultados.setVisibility(View.GONE);
 
             tvMensajeBanner.setText("🔒 Los pronósticos para este partido están cerrados.");
-            tvMensajeBanner.setBackgroundColor(Color.parseColor("#FEF9C3"));
+            cardBanner.setCardBackgroundColor(Color.parseColor("#FEF9C3"));
             tvMensajeBanner.setTextColor(Color.parseColor("#CA8A04"));
 
         } else {
             tvEstadoBadge.setText("ABIERTO");
-            tvEstadoBadge.setBackgroundColor(Color.parseColor("#E8F5E9"));
-            tvEstadoBadge.setTextColor(Color.parseColor("#2E7D32"));
+            cardEstadoBadge.setCardBackgroundColor(Color.parseColor("#E0F2FE"));
+            tvEstadoBadge.setTextColor(Color.parseColor("#0369A1"));
 
-            if (layoutOficial != null) layoutOficial.setVisibility(View.GONE);
-            if (dividerResultados != null) dividerResultados.setVisibility(View.GONE);
+            layoutOficial.setVisibility(View.GONE);
+            dividerResultados.setVisibility(View.GONE);
 
-            tvMensajeBanner.setText("✏️ Puedes modificar tu pronóstico mientras el partido esté abierto.");
-            tvMensajeBanner.setBackgroundColor(Color.parseColor("#E8F5E9"));
-            tvMensajeBanner.setTextColor(Color.parseColor("#2E7D32"));
+            tvMensajeBanner.setText("✏️ Puedes modificar tu pronóstico mientras esté abierto.");
+            cardBanner.setCardBackgroundColor(Color.parseColor("#F1F5F9"));
+            tvMensajeBanner.setTextColor(Color.parseColor("#475569"));
         }
 
         containerPronosticos.addView(cardView);
@@ -200,7 +215,6 @@ public class MisPronosticos extends AppCompatActivity {
             return listaUnificada;
         }
 
-        // Buscar todos los archivos que pertenezcan a este usuario para juntar todas sus fases
         String prefijoUsuario = "pronostico_" + idUsuario + "_";
 
         for (File archivo : archivos) {
@@ -277,12 +291,10 @@ public class MisPronosticos extends AppCompatActivity {
         }
 
         try {
-            // Lee el archivo .png directamente desde assets/banderas/
             java.io.InputStream inputStream = getAssets().open("banderas/" + codigoArchivo + ".png");
             return android.graphics.drawable.Drawable.createFromStream(inputStream, null);
         } catch (java.io.IOException e) {
             e.printStackTrace();
-            // Retorna un ícono por defecto si hay un error
             return getResources().getDrawable(android.R.drawable.ic_menu_camera, null);
         }
     }
