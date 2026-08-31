@@ -32,6 +32,10 @@
             android:name=".MenuAdministradorActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".AdministrarPartidosActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- Tabla de Posiciones -->
         <activity

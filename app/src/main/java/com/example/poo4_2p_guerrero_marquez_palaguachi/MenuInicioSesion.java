@@ -49,6 +49,7 @@ public class MenuInicioSesion extends AppCompatActivity {
                     intent = new Intent(MenuInicioSesion.this, MenuParticipanteActivity.class);
                 }
 
+                intent.putExtra("ID_USUARIO", u.getIdUsuario());
                 intent.putExtra("NOMBRE_COMPLETO", u.getNombreCompleto());
                 intent.putExtra("TIPO_USUARIO", u.getTipoUsuario());
 
