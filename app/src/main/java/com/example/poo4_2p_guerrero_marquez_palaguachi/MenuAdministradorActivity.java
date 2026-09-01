@@ -43,6 +43,8 @@ public class MenuAdministradorActivity extends AppCompatActivity {
     }
 
     public void actualizarPuntajes(View view) {
+        Intent intent = new Intent(MenuAdministradorActivity.this, ActualizarPuntajesActivity.class);
+        startActivity(intent);
     }
 
     public void salirAdmin(View view) {

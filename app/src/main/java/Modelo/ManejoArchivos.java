@@ -139,6 +139,7 @@ public class ManejoArchivos {
                     String sel1 = datos[5].trim();
                     String sel2 = datos[6].trim();
                     EstadoPartido estado = EstadoPartido.valueOf(datos[7].trim().toUpperCase());
+
                     int goles1 = 0;
                     int goles2 = 0;
 
@@ -148,7 +149,37 @@ public class ManejoArchivos {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        cargarResultadosEnPartidos(context, listaPartidos);
+
         return listaPartidos;
+    }
+
+    private static void cargarResultadosEnPartidos(Context context, List<Partido> partidos) {
+        File archivo = new File(context.getFilesDir(), "resultados.txt");
+        if (!archivo.exists()) return;
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(archivo)))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] datos = linea.split(";");
+                if (datos.length >= 4) {
+                    String idPartido = datos[1].trim();
+                    int goles1 = Integer.parseInt(datos[2].trim());
+                    int goles2 = Integer.parseInt(datos[3].trim());
+
+                    for (Partido p : partidos) {
+                        if (p.getIdPartido().equals(idPartido)) {
+                            p.setGoles1(goles1);
+                            p.setGoles2(goles2);
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void guardarEstadoPartidos(Context context, List<Partido> partidos) {
@@ -159,7 +190,7 @@ public class ManejoArchivos {
             writer.newLine();
 
             for (Partido p : partidos) {
-                writer.write(p.getIdPartido() + ";FASE_ACTUAL;" + p.getFecha() + ";" + p.getHora() + ";" + p.getEstadio() + ";" + p.getSeleccion1() + ";" + p.getSeleccion2() + ";" + p.getEstado().name());
+                writer.write(p.getIdPartido() + ";" + p.getFase() + ";" + p.getFecha() + ";" + p.getHora() + ";" + p.getEstadio() + ";" + p.getSeleccion1() + ";" + p.getSeleccion2() + ";" + p.getEstado().name());
                 writer.newLine();
             }
 
@@ -213,11 +244,11 @@ public class ManejoArchivos {
             oos.writeObject(listaPronosticos);
             oos.close();
             fos.close();
-            return true; // Éxito
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             android.util.Log.e("ERROR_ARCHIVO", "No se pudo guardar: " + e.getMessage());
-            return false; // Fallo
+            return false;
         }
     }
 
