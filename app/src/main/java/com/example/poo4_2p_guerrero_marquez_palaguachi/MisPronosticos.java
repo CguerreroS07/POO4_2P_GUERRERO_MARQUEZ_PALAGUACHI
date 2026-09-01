@@ -84,6 +84,9 @@ public class MisPronosticos extends AppCompatActivity {
 
             Partido partidoAsociado = buscarPartidoPorId(partidos, Integer.parseInt(pron.getIdPartido()));
             if (partidoAsociado != null) {
+                if (partidoAsociado.getEstado().name().equals("FINALIZADO")) {
+                    pron.calcularPuntos(partidoAsociado.getGoles1(), partidoAsociado.getGoles2());
+                }
                 agregarTarjetaPronostico(pron, partidoAsociado);
             }
         }

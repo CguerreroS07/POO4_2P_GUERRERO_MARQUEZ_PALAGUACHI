@@ -34,7 +34,6 @@ public class TablaPosiciones extends AppCompatActivity {
         tlTablaPosiciones = findViewById(R.id.tlTablaPosiciones);
         btnVolver = findViewById(R.id.btnVolver);
 
-        // Capturar datos enviados desde LoginActivity
         String nombre = getIntent().getStringExtra("NOMBRE_COMPLETO");
         String tipo = getIntent().getStringExtra("TIPO_USUARIO");
 
