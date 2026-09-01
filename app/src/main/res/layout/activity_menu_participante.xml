@@ -7,6 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".MenuParticipanteActivity">
 
+    <ImageView
+        android:id="@+id/imgFondoSuperior"
+        android:layout_width="0dp"
+        android:layout_height="270dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cancha"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgFondoInferior"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
         android:id="@+id/ParticipanteLayout"
         android:layout_width="0dp"
@@ -23,19 +43,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:gravity="center_vertical"
+            android:id="@+id/marg"
+            android:layout_width="391dp"
+            android:layout_height="155dp"
+            android:layout_marginBottom="55dp"
+            android:gravity="top"
             android:orientation="horizontal"
             android:paddingTop="8dp">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_circle_avatar"
-                android:padding="8dp"
-                android:src="@android:drawable/ic_menu_myplaces"
+                android:src="@drawable/ic_persona"
                 app:tint="#FFFFFF" />
 
             <LinearLayout
@@ -49,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bienvenido,"
-                    android:textColor="#1E293B"
+                    android:textColor="#FFFFFF"
                     android:textSize="12sp" />
 
                 <TextView
@@ -57,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre Apellido"
-                    android:textColor="#0B1B3D"
+                    android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -71,11 +90,36 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/logo_mundial_2026" />
+            <LinearLayout
+                android:layout_width="154dp"
+                android:layout_height="146dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:textAlignment="center">
+
+                <ImageView
+                    android:layout_width="137dp"
+                    android:layout_height="109dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/copa_mundial_blanca" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MUNDIAL"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="19dp"
+                    android:text="2026"
+                    android:textAlignment="center"
+                    android:textColor="#88B743" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
