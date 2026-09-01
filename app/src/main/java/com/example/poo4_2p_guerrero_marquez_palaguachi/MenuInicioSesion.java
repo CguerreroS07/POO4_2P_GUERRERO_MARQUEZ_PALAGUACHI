@@ -2,8 +2,10 @@ package com.example.poo4_2p_guerrero_marquez_palaguachi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +17,9 @@ import Modelo.Usuario;
 public class MenuInicioSesion extends AppCompatActivity {
     private EditText edtUsuario, edtContrasena;
     private Button btnIniciarSesion;
+    private ImageView imgTogglePassword;
+    private boolean contrasenaVisible = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +28,21 @@ public class MenuInicioSesion extends AppCompatActivity {
         edtUsuario = findViewById(R.id.edtUsuario);
         edtContrasena = findViewById(R.id.edtContrasena);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
+        imgTogglePassword = findViewById(R.id.imgTogglePassword);
+
+        imgTogglePassword.setOnClickListener(v -> {
+            contrasenaVisible = !contrasenaVisible;
+
+            if (contrasenaVisible) {
+                edtContrasena.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                imgTogglePassword.setImageResource(R.drawable.ic_ojo);
+            } else {
+                edtContrasena.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imgTogglePassword.setImageResource(R.drawable.ic_ojo_cerrado);
+            }
+
+            edtContrasena.setSelection(edtContrasena.getText().length());
+        });
 
         btnIniciarSesion.setOnClickListener(v -> {
             try {

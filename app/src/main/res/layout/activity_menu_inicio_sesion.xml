@@ -52,6 +52,8 @@
             android:layout_height="48dp"
             android:layout_marginBottom="12dp"
             android:background="@android:drawable/editbox_background_normal"
+            android:drawableStart="@drawable/ic_usuario"
+            android:drawablePadding="10dp"
             android:hint="Ingrese su usuario"
             android:inputType="text"
             android:paddingStart="16dp"
@@ -65,16 +67,34 @@
             android:textColor="#0B2545"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtContrasena"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginBottom="24dp"
-            android:background="@android:drawable/editbox_background_normal"
-            android:hint="Ingrese su contraseña"
-            android:inputType="textPassword"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            android:layout_marginBottom="24dp">
+
+            <EditText
+                android:id="@+id/edtContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:drawable/editbox_background_normal"
+                android:drawableStart="@drawable/ic_candado"
+                android:drawablePadding="10dp"
+                android:hint="Ingrese su contraseña"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="44dp" />
+
+            <ImageView
+                android:id="@+id/imgTogglePassword"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Mostrar u ocultar contraseña"
+                android:padding="2dp"
+                android:src="@drawable/ic_ojo_cerrado" />
+
+        </FrameLayout>
 
         <Button
             android:id="@+id/btnIniciarSesion"
@@ -91,11 +111,11 @@
         android:id="@+id/imgEstadio"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.25"
         android:scaleType="fitXY"
         android:src="@drawable/canchadefutbol"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.30"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
