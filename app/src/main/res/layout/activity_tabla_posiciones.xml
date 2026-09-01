@@ -9,6 +9,7 @@
     android:padding="16dp"
     tools:context=".TablaPosiciones">
 
+    <!-- HEADER DE USUARIO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,6 +66,7 @@
             android:src="@drawable/logo_mundial_2026" />
     </LinearLayout>
 
+    <!-- TÍTULO DE LA SECCIÓN -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,6 +103,7 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- CONTENEDOR DE LA TABLA -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -110,61 +113,63 @@
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:fillViewport="true">
 
-            <TableRow
+            <TableLayout
+                android:id="@+id/tlTablaPosiciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#0B1B3D"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp">
+                android:stretchColumns="1">
 
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Pos."
-                    android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="8dp"
-                    android:text="Participante"
-                    android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Puntos"
-                    android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-            </TableRow>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true">
-
-                <TableLayout
-                    android:id="@+id/tlTablaPosiciones"
+                <!-- CABECERA -->
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="1" />
-            </ScrollView>
-        </LinearLayout>
+                    android:background="#0B1B3D"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Pos."
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Participante"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Puntos"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+            </TableLayout>
+        </ScrollView>
     </androidx.cardview.widget.CardView>
 
+    <!-- BOTÓN VOLVER -->
     <Button
         android:id="@+id/btnVolver"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
