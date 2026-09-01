@@ -9,7 +9,6 @@
     android:padding="16dp"
     tools:context=".TablaPosiciones">
 
-    <!-- Encabezado de Usuario / Banner Superior -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +65,6 @@
             android:src="@drawable/logo_mundial_2026" />
     </LinearLayout>
 
-    <!-- Título de la sección -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,7 +101,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Card Contenedora de la Tabla -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -118,7 +115,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Cabecera de la Tabla -->
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -155,7 +151,6 @@
                     android:textStyle="bold" />
             </TableRow>
 
-            <!-- ScrollView dinámico -->
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -170,7 +165,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Botón Volver -->
     <Button
         android:id="@+id/btnVolver"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"

@@ -11,26 +11,17 @@
         android:layout_height="76dp"
         android:background="#0C2340"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp">
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_sort_by_size"
-            android:rotation="-90"
-            app:tint="#FFFFFF" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="42dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/logo_mundial_2026" />
+            android:src="@drawable/copa_mundial_blanca" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:orientation="vertical">
 
             <TextView

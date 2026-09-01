@@ -30,14 +30,13 @@
             android:paddingHorizontal="16dp">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/logo_mundial_2026" />
+                android:layout_width="59dp"
+                android:layout_height="50dp"
+                android:src="@drawable/copa_mundial_blanca" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -47,6 +46,7 @@
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
