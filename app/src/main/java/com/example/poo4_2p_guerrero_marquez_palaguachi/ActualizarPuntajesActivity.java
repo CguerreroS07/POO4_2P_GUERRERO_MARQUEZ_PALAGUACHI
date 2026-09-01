@@ -27,8 +27,13 @@ import Modelo.Partido;
 import Modelo.Participante;
 import Modelo.Pronostico;
 
+/**
+ * Actividad que permite al administrador actualizar los puntajes de todos los participantes.
+ * El proceso consiste en comparar los pronósticos registrados con los resultados oficiales de los partidos finalizados.
+ */
 public class ActualizarPuntajesActivity extends AppCompatActivity {
 
+    /** Botón para disparar el proceso de actualización de puntajes. */
     private Button btnActualizarPuntajes;
 
     @Override

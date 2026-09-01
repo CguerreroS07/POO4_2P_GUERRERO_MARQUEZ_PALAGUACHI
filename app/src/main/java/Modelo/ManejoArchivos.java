@@ -16,6 +16,10 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase utilitaria para la gestión de persistencia de datos en el sistema.
+ * Permite la lectura y escritura de usuarios, partidos y pronósticos tanto en formato texto como serializado.
+ */
 public class ManejoArchivos {
 
     private static void asegurarExistencia(Context context, String nombreArchivo) {
@@ -36,6 +40,13 @@ public class ManejoArchivos {
         }
     }
 
+    /**
+     * Lee la lista de usuarios desde el archivo de almacenamiento interno.
+     * Si el archivo no existe, lo copia desde los assets.
+     *
+     * @param context El contexto de la aplicación.
+     * @return Una lista de objetos Usuario (Participantes y Administradores).
+     */
     public static List<Usuario> leerUsuarios(Context context) {
         asegurarExistencia(context, "usuarios.txt");
         List<Usuario> listaUsuarios = new ArrayList<>();
@@ -112,6 +123,12 @@ public class ManejoArchivos {
         return "Administrador";
     }
 
+    /**
+     * Lee la lista de partidos desde el archivo de texto.
+     *
+     * @param context El contexto de la aplicación.
+     * @return Una lista de objetos Partido.
+     */
     public static List<Partido> leerPartidos(Context context) {
         asegurarExistencia(context, "partidos.txt");
         List<Partido> listaPartidos = new ArrayList<>();
@@ -182,6 +199,12 @@ public class ManejoArchivos {
         }
     }
 
+    /**
+     * Guarda el estado actual de la lista de partidos en el archivo de texto.
+     *
+     * @param context  El contexto de la aplicación.
+     * @param partidos Lista de partidos a guardar.
+     */
     public static void guardarEstadoPartidos(Context context, List<Partido> partidos) {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(context.openFileOutput("partidos.txt", Context.MODE_PRIVATE))
@@ -199,6 +222,12 @@ public class ManejoArchivos {
         }
     }
 
+    /**
+     * Guarda los resultados oficiales de los partidos en un archivo de texto.
+     *
+     * @param context    El contexto de la aplicación.
+     * @param resultados Lista de cadenas con el formato de resultado oficial.
+     */
     public static void guardarResultados(Context context, List<String> resultados) {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(context.openFileOutput("resultados.txt", Context.MODE_PRIVATE))
@@ -212,6 +241,14 @@ public class ManejoArchivos {
         }
     }
 
+    /**
+     * Guarda un nuevo pronóstico o reemplaza uno existente para un mismo partido y participante.
+     * Los pronósticos se almacenan de forma serializada en archivos por participante y fase.
+     *
+     * @param context         El contexto de la aplicación.
+     * @param nuevoPronostico El objeto Pronostico a guardar.
+     * @return true si se guardó con éxito, false en caso contrario.
+     */
     public static boolean guardarOReemplazarPronostico(android.content.Context context, Modelo.Pronostico nuevoPronostico) {
         String nombreArchivo = "pronostico_" + nuevoPronostico.getIdParticipante() + "_" + nuevoPronostico.getFaseTorneo().name().toLowerCase() + ".dat";
         java.util.List<Modelo.Pronostico> listaPronosticos = new java.util.ArrayList<>();
@@ -252,6 +289,13 @@ public class ManejoArchivos {
         }
     }
 
+    /**
+     * Serializa un pronóstico añadiéndolo a un archivo existente o creando uno nuevo.
+     *
+     * @param context       El contexto de la aplicación.
+     * @param pronostico    El pronóstico a serializar.
+     * @param nombreArchivo Nombre del archivo de destino.
+     */
     public static void serializarPronostico(Context context, Pronostico pronostico, String nombreArchivo) {
         List<Pronostico> lista = deserializarPronosticos(context, nombreArchivo);
         lista.add(pronostico);
@@ -264,6 +308,13 @@ public class ManejoArchivos {
         }
     }
 
+    /**
+     * Deserializa una lista de pronósticos desde un archivo específico.
+     *
+     * @param context       El contexto de la aplicación.
+     * @param nombreArchivo El nombre del archivo a leer.
+     * @return Una lista de objetos Pronostico.
+     */
     @SuppressWarnings("unchecked")
     public static List<Pronostico> deserializarPronosticos(Context context, String nombreArchivo) {
         List<Pronostico> lista = new ArrayList<>();
@@ -282,6 +333,12 @@ public class ManejoArchivos {
         return lista;
     }
 
+    /**
+     * Actualiza los puntajes acumulados de los participantes en el archivo de texto.
+     *
+     * @param context       El contexto de la aplicación.
+     * @param participantes Lista de participantes con sus puntajes actualizados.
+     */
     public static void actualizarPuntajesParticipantes(Context context, List<Participante> participantes) {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(context.openFileOutput("participantes.txt", Context.MODE_PRIVATE))

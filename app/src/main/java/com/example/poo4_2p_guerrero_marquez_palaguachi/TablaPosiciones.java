@@ -18,11 +18,19 @@ import Modelo.ManejoArchivos;
 import Modelo.Participante;
 import Modelo.Usuario;
 
+/**
+ * Actividad que presenta el ranking de los participantes ordenados por su puntaje acumulado de forma descendente.
+ */
 public class TablaPosiciones extends AppCompatActivity {
 
+    /** Tabla de interfaz donde se listan los participantes y sus puntos. */
     private TableLayout tlTablaPosiciones;
+    /** Botón para regresar al menú principal. */
     private Button btnVolver;
-    private TextView tvNombreHeader, tvTipoHeader;
+    /** Encabezado que muestra el nombre del usuario activo. */
+    private TextView tvNombreHeader;
+    /** Encabezado que muestra el tipo de usuario activo. */
+    private TextView tvTipoHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

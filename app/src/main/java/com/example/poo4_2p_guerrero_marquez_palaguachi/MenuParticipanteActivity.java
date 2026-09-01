@@ -11,6 +11,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/**
+ * Actividad que representa el menú principal para los usuarios con rol de Participante.
+ * Ofrece acceso a las funciones de consulta de tabla de posiciones, registro de nuevos pronósticos y consulta de pronósticos propios.
+ */
 public class MenuParticipanteActivity extends AppCompatActivity {
 
     private TextView tvNombreHeader, tvTipoHeader;

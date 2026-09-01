@@ -26,10 +26,18 @@ import Modelo.EstadoPartido;
 import Modelo.ManejoArchivos;
 import Modelo.Partido;
 
+/**
+ * Actividad para la gestión administrativa de los partidos del torneo.
+ * Permite cerrar el registro de pronósticos y registrar los resultados oficiales de los encuentros.
+ */
 public class AdministrarPartidosActivity extends AppCompatActivity {
+    /** Selector de fases del torneo para filtrar los partidos. */
     private Spinner spinnerFasesAdmin;
+    /** Contenedor dinámico donde se inflan las tarjetas de los partidos. */
     private LinearLayout contenedorPartidosAdmin;
+    /** Lista local de los partidos cargados desde el archivo. */
     private List<Partido> listaPartidos;
+    /** Caché en memoria de las banderas de los países para optimizar el rendimiento. */
     private java.util.HashMap<String, android.graphics.drawable.Drawable> cacheBanderas = new java.util.HashMap<>();
 
     @Override

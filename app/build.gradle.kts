@@ -49,3 +49,24 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
 }
+tasks.register<Javadoc>("generateJavadoc") {
+    val javaCompile = tasks.named<JavaCompile>("compileDebugJavaWithJavac")
+    source = javaCompile.get().source
+    classpath = javaCompile.get().classpath
+
+    (options as StandardJavadocDocletOptions).apply {
+        encoding = "UTF-8"
+        charSet = "UTF-8"
+        addStringOption("Xdoclint:none", "-quiet")
+
+        // 1. Cambia el título principal ("app API")
+        docTitle = "Documentación del Proyecto POO"
+        windowTitle = "Documentación POO"
+
+        // 2. Crea grupos personalizados para la tabla principal
+        group("Activities", listOf("com.example.poo4_2p_guerrero_marquez_palaguachi*"))
+        group("Modelo de Datos", listOf("Modelo*"))
+    }
+
+    exclude("**/R.java", "**/BuildConfig.java")
+}

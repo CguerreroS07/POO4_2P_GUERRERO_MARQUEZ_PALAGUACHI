@@ -11,6 +11,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/**
+ * Actividad que representa el menú principal para los usuarios con rol de Administrador.
+ * Proporciona acceso a las funciones de administración de partidos y actualización de puntajes.
+ */
 public class MenuAdministradorActivity extends AppCompatActivity {
 
     private TextView tvNombreHeader, tvTipoHeader;

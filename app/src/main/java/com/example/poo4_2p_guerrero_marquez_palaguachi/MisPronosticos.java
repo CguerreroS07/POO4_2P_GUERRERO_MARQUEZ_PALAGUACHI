@@ -25,10 +25,17 @@ import Modelo.ManejoArchivos;
 import Modelo.Partido;
 import Modelo.Pronostico;
 
+/**
+ * Actividad que muestra un resumen de todos los pronósticos registrados por el participante.
+ * Indica el estado del partido y los puntos obtenidos si el encuentro ya ha finalizado.
+ */
 public class MisPronosticos extends AppCompatActivity {
 
+    /** Contenedor de la lista de pronósticos del usuario. */
     private LinearLayout containerPronosticos;
+    /** Botón para regresar al menú anterior. */
     private View btnVolver;
+    /** ID del usuario que ha iniciado sesión. */
     private String idUsuario;
 
     @Override

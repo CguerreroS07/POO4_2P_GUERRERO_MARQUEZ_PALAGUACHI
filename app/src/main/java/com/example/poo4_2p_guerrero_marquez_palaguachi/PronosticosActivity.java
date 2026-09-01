@@ -25,10 +25,18 @@ import Modelo.ManejoArchivos;
 import Modelo.Partido;
 import Modelo.Pronostico;
 
+/**
+ * Actividad que permite a los participantes visualizar los partidos por fase y registrar sus pronósticos.
+ * Solo se pueden guardar pronósticos para partidos que se encuentren en estado ABIERTO.
+ */
 public class PronosticosActivity extends AppCompatActivity {
+    /** Caché en memoria para las imágenes de las banderas. */
     private java.util.HashMap<String, android.graphics.drawable.Drawable> cacheBanderas = new java.util.HashMap<>();
+    /** Spinner para seleccionar la fase del torneo. */
     private Spinner spFaseTorneo;
+    /** Contenedor dinámico para la lista de partidos. */
     private LinearLayout contenedorPartidos;
+    /** Lista completa de partidos leída al inicio. */
     private List<Partido> todosLosPartidos;
 
     @Override

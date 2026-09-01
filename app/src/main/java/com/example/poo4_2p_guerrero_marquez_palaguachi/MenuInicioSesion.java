@@ -14,10 +14,20 @@ import java.util.List;
 import Modelo.ManejoArchivos;
 import Modelo.Usuario;
 
+/**
+ * Actividad principal de inicio de sesión del sistema.
+ * Permite a los usuarios autenticarse y redirige al menú correspondiente según su tipo (Administrador o Participante).
+ */
 public class MenuInicioSesion extends AppCompatActivity {
-    private EditText edtUsuario, edtContrasena;
+    /** Campo de texto para el nombre de usuario. */
+    private EditText edtUsuario;
+    /** Campo de texto para la contraseña. */
+    private EditText edtContrasena;
+    /** Botón para enviar las credenciales. */
     private Button btnIniciarSesion;
+    /** Icono interactivo para mostrar/ocultar la contraseña. */
     private ImageView imgTogglePassword;
+    /** Estado de visibilidad de la contraseña. */
     private boolean contrasenaVisible = false;
 
     @Override
