@@ -56,6 +56,19 @@ public class AdministrarPartidosActivity extends AppCompatActivity {
         ManejoArchivos.guardarEstadoPartidos(this, listaPartidos);
     }
 
+    private String mapearFaseAEnum(String faseSpinner) {
+        switch (faseSpinner) {
+            case "Fase de grupos": return "FASE_DE_GRUPOS";
+            case "Dieciseisavos": return "DIECISEISAVOS_DE_FINAL";
+            case "Octavos": return "OCTAVOS_DE_FINAL";
+            case "Cuartos de final": return "CUARTOS_DE_FINAL";
+            case "Semifinales": return "SEMIFINALES";
+            case "Tercer lugar": return "TERCER_LUGAR";
+            case "Final": return "FINAL";
+            default: return "";
+        }
+    }
+
     private void cargarFasesSpinner() {
         String[] fases = {
                 "Fase de grupos",
@@ -85,10 +98,9 @@ public class AdministrarPartidosActivity extends AppCompatActivity {
         if (listaPartidos == null) return;
 
         for (Partido p : listaPartidos) {
-            String faseArchivo = p.getFase().toLowerCase().replace("_", " ").trim();
-            String faseMenu = faseSeleccionada.toLowerCase().replace("_", " ").trim();
+            String faseCodigo = mapearFaseAEnum(faseSeleccionada);
 
-            if (!faseArchivo.equals(faseMenu) && !faseArchivo.contains(faseMenu) && !faseMenu.contains(faseArchivo)) {
+            if (!p.getFase().trim().toUpperCase().equals(faseCodigo)) {
                 continue;
             }
 
