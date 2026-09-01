@@ -93,12 +93,37 @@
                 android:textColor="#475569"
                 android:textSize="14sp" />
 
-            <Spinner
-                android:id="@+id/spFaseTorneo"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@android:drawable/btn_dropdown"
-                android:elevation="1dp" />
+                android:background="@drawable/spinner_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_copa"
+                    app:tint="#0C2340" />
+
+                <Spinner
+                    android:id="@+id/spFaseTorneo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_flecha_derecha"
+                    android:rotation="90"
+                    app:tint="#0C2340" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

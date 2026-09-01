@@ -49,7 +49,7 @@
             android:id="@+id/marg"
             android:layout_width="391dp"
             android:layout_height="155dp"
-            android:layout_marginBottom="55dp"
+            android:layout_marginBottom="61dp"
             android:gravity="top"
             android:orientation="horizontal"
             android:paddingTop="8dp">
